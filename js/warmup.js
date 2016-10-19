@@ -1,8 +1,8 @@
 'use strict';
 
-/* 
+/*
 this is an Array of Objects representing games the Seahawks have played
-objects include the opponent name, Seattle's final score, and the opponents 
+objects include the opponent name, Seattle's final score, and the opponents
 final score.
 This array is ordered by date.
 */
@@ -14,11 +14,14 @@ var seahawks2016 = [
   { oppName: 'Falcons', seattle: 26, opponent: 24 },  //won
 ];
 
-/* write a function `won()` that takes as a parameter an object representing a 
+/* write a function `won()` that takes as a parameter an object representing a
 SINGLE game (like one of the objects in the above array) and returns whether
 or not the Seahawks won the game.
 */
 
+function won(game) {
+  return game.seattle > game.opponent;
+}
 
 
 /* Use your `won()` function to log out an array of games that the Seahawks won.
@@ -28,9 +31,21 @@ BONUS: use the .map() function to just log out an array of the team names the
 Seahawks beat.
 */
 
+function opponentName(game) {
+  return game.oppName;
+}
+
+console.log("Teams defeated: " + seahawks2016.filter(won).map(opponentName));
 
 
-/* Use the `.reduce()` function to determine the average point spread 
+
+
+/* Use the `.reduce()` function to determine the average point spread
 of games the Seahawks *won* (that is, the average number of points they won by).
 */
 
+function getSum(total, game) {
+  return total + game.seattle - game.opponent;
+}
+
+console.log("Average Point Spread: " + seahawks2016.filter(won).reduce(getSum, 0)/seahawks2016.filter(won).length);
